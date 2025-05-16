@@ -50,6 +50,11 @@
 				z-index: 0;
 			}
 			
+			/* Override preload class */
+			body.is-preload #header:after {
+				display: none !important;
+			}
+			
 			#header .inner {
 				position: relative;
 				text-align: center;
@@ -58,9 +63,6 @@
 				background: transparent;
 				border-radius: 10px;
 				margin: 0 2em;
-				backdrop-filter: none;
-				-webkit-backdrop-filter: none;
-				box-shadow: none;
 				margin-top: 4em;
 			}
 			
@@ -75,9 +77,6 @@
 				color: #FFD700;
 				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 				letter-spacing: 1px;
-				filter: none;
-				-webkit-filter: none;
-				animation: fadeIn 1.5s ease-in;
 			}
 			
 			#header p {
@@ -86,9 +85,6 @@
 				margin-bottom: 2em;
 				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 				font-weight: 400;
-				filter: none;
-				-webkit-filter: none;
-				animation: fadeIn 1.5s ease-in;
 			}
 			
 			#nav {
@@ -184,13 +180,11 @@
 			}
 
 			@keyframes fadeIn {
-				from {
+				0% {
 					opacity: 0;
-					transform: translateY(20px);
 				}
-				to {
+				100% {
 					opacity: 1;
-					transform: translateY(0);
 				}
 			}
 		</style>
@@ -657,6 +651,17 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+					// Trigger the fade-in after a short delay
+					setTimeout(function() {
+						document.querySelector('#header::before').style.opacity = '1';
+						document.querySelector('#header .inner').style.opacity = '1';
+						document.querySelector('#header h1').style.opacity = '1';
+						document.querySelector('#header p').style.opacity = '1';
+					}, 100);
+				});
+			</script>
 
 	</body>
 </html>
